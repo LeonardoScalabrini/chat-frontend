@@ -9,12 +9,10 @@ const Listar = ({messages}) => (
   <List className='list'>
     {messages.map((item) => {
        return (
-         <ListItem key={item._id}>
-           <ListItem>
-             <ListItemText>
-               {item.value}
-             </ListItemText>
-           </ListItem>
+         <ListItem key={item.id}>
+           <ListItemText>
+             {item.value}
+           </ListItemText>
          </ListItem>
        )
      })}

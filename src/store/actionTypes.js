@@ -1,2 +1,3 @@
+export const SEND_MESSAGE = 'SEND_MESSAGE'
 export const LIST_MESSAGE = 'LIST_MESSAGE'
 export const ERROR_MESSAGE = 'ERROR_MESSAGE'
