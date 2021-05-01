@@ -23,12 +23,7 @@ class EnviarMensagem extends Component {
   }
 
   configureSocket = () => {
-    alert('configureSocket')
-    var socket = socketClient(SERVER);
-    socket.on('connection', () => {
-        alert('connectado')
-    });
-    this.socket = socket;
+    this.socket = socketClient(SERVER);
   }
 
   enviarMensagem (e) {
