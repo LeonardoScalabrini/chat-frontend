@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import { enviarMensagem } from '../../store/actions'
+import socketClient from "socket.io-client";
+const SERVER = "http://localhost:9092";
 
 class EnviarMensagem extends Component {
 
@@ -13,14 +15,29 @@ class EnviarMensagem extends Component {
     this.state = {
       message: ''
     }
-
     this.enviarMensagem = this.enviarMensagem.bind(this)
+  }
+
+  componentDidMount() {
+    this.configureSocket(); 
+  }
+
+  configureSocket = () => {
+    alert('configureSocket')
+    var socket = socketClient(SERVER);
+    socket.on('connection', () => {
+        alert('connectado')
+    });
+    this.socket = socket;
   }
 
   enviarMensagem (e) {
     let message = this.messageInput.value
     this.props.enviarMensagem(message)
     this.setState({ message: '' })
+    var jsonObject = {userName: 'userName',
+      message: 'CHEGGGOOOUU'};
+    this.socket.emit('chatevent', jsonObject);
   }
 
   render () {
