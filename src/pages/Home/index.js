@@ -8,11 +8,11 @@ class Home extends Component {
 
   render () {
     return (
-      <Container align='center' style={{marginTop: '16px'}}>
-        <Grid item xs={12} sm={6}>
+      <Container>
+        <Grid item xs={12} sm={12}>
           <Listar/>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <EnviarMensagem/>
         </Grid>
       </Container>

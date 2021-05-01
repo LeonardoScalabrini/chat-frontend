@@ -1,22 +1,23 @@
 import React from 'react'
+import Container from '@material-ui/core/Container'
 import { connect } from 'react-redux'
 import { messages } from '../../store/selectors'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import './style.css'
 
 const Listar = ({messages}) => (
-  <List className='list'>
-    {messages.map((item) => {
-       return (
-         <ListItem key={item.id}>
-           <ListItemText>
-             {item.value}
-           </ListItemText>
-         </ListItem>
-       )
-     })}
-  </List>
+  <Container>
+    <div class="well">
+      {messages.map((item) => {
+        return (
+          <blockquote>
+            <p>
+              {item.value}
+            </p>
+          </blockquote>
+        )
+      })}
+    </div>
+  </Container>
 )
 
 export default connect(messages)(Listar)

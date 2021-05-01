@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
+import { connect } from 'react-redux'
 import { enviarMensagem } from '../../store/actions'
 import socketClient from "socket.io-client";
 const SERVER = "http://localhost:9092";
@@ -30,17 +29,14 @@ class EnviarMensagem extends Component {
     let message = this.messageInput.value
     this.props.enviarMensagem(message)
     this.setState({ message: '' })
-    var jsonObject = {userName: 'userName',
-      message: 'CHEGGGOOOUU'};
+    var jsonObject = { userName: 'userName', message: message };
     this.socket.emit('chatevent', jsonObject);
   }
 
   render () {
     return (
-      <Container align='center'>
-        <Grid item xs={12} sm={6}>
+      <Container>
           <TextField
-            required
             id='messageInput'
             fullWidth
             variant='outlined'
@@ -55,8 +51,6 @@ class EnviarMensagem extends Component {
             inputRef={(ev) => {
                         this.messageInput = ev
                       }} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
           <Button
             fullWidth
             variant='contained'
@@ -65,7 +59,6 @@ class EnviarMensagem extends Component {
             color='primary'>
             Enviar Mensagem
           </Button>
-        </Grid>
       </Container>
     )
   }
