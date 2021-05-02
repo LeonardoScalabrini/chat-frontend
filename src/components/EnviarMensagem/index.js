@@ -17,15 +17,15 @@ class EnviarMensagem extends Component {
   }
 
   componentDidMount () {
-    configureSocket()
+    configureSocket('chat1')
   }
 
   enviarMensagem (e) {
     let message = this.messageInput.value
     this.props.enviarMensagem(message)
     this.setState({ message: '' })
-    var jsonObject = { userName: 'userName', message: message }
-    sendMessage(jsonObject)
+    var jsonObject = { '@class': 'com.chat.models.ChatObject', userName: 'userName', message: message }
+    sendMessage('chat1', jsonObject)
   }
 
   render () {

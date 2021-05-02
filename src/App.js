@@ -7,8 +7,12 @@ import { enviarMensagem } from './store/actions'
 class App extends Component {
 
   componentDidMount () {
-    configureSocket()
-    readMessage((data) => {
+    configureSocket('chat1')
+    configureSocket('chat2')
+    readMessage('chat1',(data) => {
+      this.props.enviarMensagem(data.message)
+    })
+    readMessage('chat2',(data) => {
       this.props.enviarMensagem(data.message)
     })
   }
