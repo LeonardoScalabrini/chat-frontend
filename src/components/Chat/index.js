@@ -12,7 +12,7 @@ const Chat = (props) => {
   const receiveMessage = props.receiveMessage
   const listMessages = props.listMessages
   useEffect(() => {
-    listMessages()
+    listMessages(param)
     configureSocket(param)
     readMessage(param, (data) => {
       receiveMessage(data.message)

@@ -24,9 +24,9 @@ export const receiveMessage = (data) => {
   }
 }
 
-export const listMessages = () => {
+export const listMessages = (chat) => {
   return dispatch => {
-    getMessages().then((r) => {
+    getMessages(chat).then((r) => {
       return dispatch({
         type: LIST_MESSAGE,
         payload: r
