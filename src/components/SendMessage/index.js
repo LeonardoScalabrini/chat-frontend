@@ -1,36 +1,31 @@
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
 import { connect } from 'react-redux'
-import { enviarMensagem } from '../../store/actions'
-import { configureSocket, sendMessage } from '../../socket'
+import { sendMessageHandler } from '../../store/actions'
+import './style.css'
 
-class EnviarMensagem extends Component {
+class SendMessage extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      message: ''
+      message: '',
+      chat: props.chat
     }
-    this.enviarMensagem = this.enviarMensagem.bind(this)
+    this.messageHandler = this.messageHandler.bind(this)
   }
 
-  componentDidMount () {
-    configureSocket('chat1')
-  }
-
-  enviarMensagem (e) {
+  messageHandler () {
     let message = this.messageInput.value
-    this.props.enviarMensagem(message)
-    this.setState({ message: '' })
     var jsonObject = { '@class': 'com.chat.models.ChatObject', userName: 'userName', message: message }
-    sendMessage('chat1', jsonObject)
+    this.props.sendMessageHandler(this.state.chat, jsonObject)
+    this.setState({ message: '' })
   }
 
   render () {
     return (
-      <Container>
+      <div className='sendMessage'>
         <TextField
           id='messageInput'
           fullWidth
@@ -49,14 +44,13 @@ class EnviarMensagem extends Component {
         <Button
           fullWidth
           variant='contained'
-          className='enviar-mensagem'
-          onClick={this.enviarMensagem}
+          onClick={this.messageHandler}
           color='primary'>
           Enviar Mensagem
         </Button>
-      </Container>
+      </div>
     )
   }
 }
 
-export default connect(null, {enviarMensagem})(EnviarMensagem)
+export default connect(null, {sendMessageHandler})(SendMessage)

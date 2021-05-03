@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
-import Listar from '../../components/Listar'
-import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
-import EnviarMensagem from '../../components/EnviarMensagem'
+import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
+const { REACT_APP_LIST_CHATS } = process.env
 
 class Home extends Component {
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      chats: REACT_APP_LIST_CHATS.split(',')
+    }
+  }
 
   render () {
     return (
       <Container>
-        <Grid item xs={12} sm={12}>
-          <Listar/>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <EnviarMensagem/>
-        </Grid>
+        {this.state.chats.map(chat => {
+           return (
+             <Button
+               key={chat}
+               fullWidth
+               className='button-chat'
+               color='inherit'>
+               <Link to={`/${chat}`}>
+               {`#${chat}`}
+               </Link>
+             </Button>
+           )})}
       </Container>
     )
   }

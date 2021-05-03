@@ -1,4 +1,4 @@
-import { SEND_MESSAGE, LIST_MESSAGE, ERROR_MESSAGE } from '../actionTypes.js'
+import { RECEIVE_MESSAGE, LIST_MESSAGE, ERROR_MESSAGE } from '../actionTypes.js'
 
 const initialState = {
   messages: []
@@ -6,8 +6,9 @@ const initialState = {
 
 export default function reducer (state = initialState , action) {
   switch (action.type) {
-    case SEND_MESSAGE: {
-      state = {...state, messages: [...state.messages, action.payload] }
+    case RECEIVE_MESSAGE: {
+      const doc = { id: Math.random(), value: action.payload }
+      state = {...state, messages: [...state.messages, doc] }
       return state
     }
     case LIST_MESSAGE: {

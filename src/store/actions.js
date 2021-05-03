@@ -1,30 +1,36 @@
-import { ERROR_MESSAGE, SEND_MESSAGE } from './actionTypes'
-export const enviarMensagem = (content) => {
-  return dispatch => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: content
-    }
+import { getMessages } from '../api'
+import { sendMessage } from '../socket'
+import { ERROR_MESSAGE, LIST_MESSAGE, RECEIVE_MESSAGE } from './actionTypes'
 
-    fetch('/message', requestOptions)
-      .then(response => {
-        return response.json().then(data => {
-          if (response.ok) {
-            return dispatch({
-              type: SEND_MESSAGE,
-              payload: data
-            })
-          }
-          return dispatch({
-            type: ERROR_MESSAGE,
-            payload: data
-          })
-        })
-      })
-      .catch(error => dispatch({
+export const sendMessageHandler = (chat, data) => {
+  return dispatch => {
+    try {
+      sendMessage(chat, data)
+    } catch (error) {
+      return dispatch({
         type: ERROR_MESSAGE,
         payload: error
-      }))
+      })
+    }
+  }
+}
+
+export const receiveMessage = (data) => {
+  return dispatch => {
+    return dispatch({
+      type: RECEIVE_MESSAGE,
+      payload: data
+    })
+  }
+}
+
+export const listMessages = () => {
+  return dispatch => {
+    getMessages().then((r) => {
+      return dispatch({
+        type: LIST_MESSAGE,
+        payload: r
+      })
+    })
   }
 }
