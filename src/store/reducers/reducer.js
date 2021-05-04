@@ -7,7 +7,7 @@ const initialState = {
 export default function reducer (state = initialState , action) {
   switch (action.type) {
     case RECEIVE_MESSAGE: {
-      const doc = { id: Math.random(), value: action.payload }
+      const doc = { id: action.payload.id, message: action.payload.message }
       state = {...state, messages: [...state.messages, doc] }
       return state
     }

@@ -18,9 +18,12 @@ class SendMessage extends Component {
 
   messageHandler () {
     let message = this.messageInput.value
-    var messageRequest = { chat: this.state.chat, message: message }
-    this.props.sendMessageHandler(this.state.chat, messageRequest)
-    this.setState({ message: '' })
+
+    if (message) {
+      var messageRequest = { chat: this.state.chat, message: message }
+      this.props.sendMessageHandler(this.state.chat, messageRequest)
+      this.setState({ message: '' })
+    }
   }
 
   render () {
@@ -33,6 +36,7 @@ class SendMessage extends Component {
           margin='normal'
           label='Mensagem'
           name='message'
+          inputProps={{ maxLength: 255 }}
           value={this.state.message}
           onChange={event => {
                       const { value } = event.target

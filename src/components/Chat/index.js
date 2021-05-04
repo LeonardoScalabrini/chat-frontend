@@ -6,6 +6,7 @@ import { messages } from '../../store/selectors'
 import { configureSocket, readMessage } from '../../socket'
 import { receiveMessage, listMessages } from '../../store/actions'
 import './style.css'
+import Disconnect from '../Disconnect'
 
 const Chat = (props) => {
   const param = props.match.params.chat
@@ -15,7 +16,7 @@ const Chat = (props) => {
     listMessages(param)
     configureSocket(param)
     readMessage(param, (data) => {
-      receiveMessage(data.message)
+      receiveMessage(data)
     })
   }, [param, receiveMessage, listMessages])
   return (
@@ -24,12 +25,13 @@ const Chat = (props) => {
         {props.messages.map((item) => {
            return (
              <p key={item.id}>
-               {item.value}
+               {item.message}
              </p>
            )
          })}
       </div>
       <SendMessage chat={param} />
+      <Disconnect />
     </Container>
   )
 }
