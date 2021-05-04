@@ -18,8 +18,8 @@ class SendMessage extends Component {
 
   messageHandler () {
     let message = this.messageInput.value
-    var jsonObject = { '@class': 'com.chat.models.ChatObject', userName: 'userName', message: message }
-    this.props.sendMessageHandler(this.state.chat, jsonObject)
+    var messageRequest = { chat: this.state.chat, message: message }
+    this.props.sendMessageHandler(this.state.chat, messageRequest)
     this.setState({ message: '' })
   }
 
