@@ -10,15 +10,15 @@ import Disconnect from '../Disconnect'
 
 const Chat = (props) => {
   const param = props.match.params.chat
-  const receiveMessage = props.receiveMessage
-  const listMessages = props.listMessages
+  const receiveMessageAction = props.receiveMessage
+  const listMessagesAction = props.listMessages
   useEffect(() => {
-    listMessages(param)
+    listMessagesAction(param)
     configureSocket(param)
     readMessage(param, (data) => {
-      receiveMessage(data)
+      receiveMessageAction(data)
     })
-  }, [param, receiveMessage, listMessages])
+  }, [param, receiveMessageAction, listMessagesAction])
   return (
     <Container>
       <div className='well'>
